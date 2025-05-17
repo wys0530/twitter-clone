@@ -1,5 +1,5 @@
 ## 프로젝트 구조
-
+```
 twitter-clone/
 ├── public/
 ├── src/
@@ -22,3 +22,4 @@ twitter-clone/
 │ │ └── TweetDetail.jsx # 트윗 상세 보기
 │ ├── router.jsx # 라우팅 설정 파일
 │ └── App.jsx # 앱 전체 레이아웃 및 라우터 출력
+```

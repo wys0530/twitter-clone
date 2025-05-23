@@ -1,4 +1,5 @@
 # 구현 화면(25.05.23)
+가운데 메인 화면만 스크롤 가능하도록 구현
 
 ![alt text](image.png)
 ![alt text](image-1.png)

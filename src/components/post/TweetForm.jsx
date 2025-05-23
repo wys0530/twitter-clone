@@ -1,14 +1,15 @@
+import React, { useState } from "react";
 import styled from "styled-components";
-import {
-  FaGlobeAsia,
-  FaRegImage,
-  FaRegSmile,
-  FaCalendarAlt,
-} from "react-icons/fa";
-import { IoLocationOutline } from "react-icons/io5";
+
+import { FaEarthAmericas } from "react-icons/fa6";
+import { BsEmojiSmile } from "react-icons/bs";
+import { RiListRadio, RiCalendarScheduleLine } from "react-icons/ri";
+import { FiImage } from "react-icons/fi";
+import { MdOutlineGifBox } from "react-icons/md";
+import { GrLocation } from "react-icons/gr";
 
 const FormContainer = styled.div`
-  margin-top: 50px;
+  margin-top: 60px;
   display: flex;
   padding: 1rem;
   border-bottom: 1px solid #2f3336;
@@ -16,11 +17,11 @@ const FormContainer = styled.div`
 `;
 
 const ProfileImage = styled.div`
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background-color: #aaa;
-  margin-right: 1rem;
+  margin-right: 0.8rem;
 `;
 
 const ContentArea = styled.div`
@@ -30,6 +31,9 @@ const ContentArea = styled.div`
 `;
 
 const Input = styled.textarea`
+  @import url("https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap");
+
+  font-family: "Gothic A1", sans-serif;
   background: transparent;
   border: none;
   resize: none;
@@ -37,7 +41,7 @@ const Input = styled.textarea`
   color: white;
   font-size: 1.2rem;
   width: 100%;
-  height: 80px;
+  height: 50px;
   margin-bottom: 0.5rem;
 
   &::placeholder {
@@ -45,13 +49,16 @@ const Input = styled.textarea`
   }
 `;
 
-const Settings = styled.div`
+const ReplySettings = styled.div`
   font-size: 0.85rem;
   color: #1d9bf0;
-  display: flex;
   align-items: center;
   gap: 0.3rem;
   margin-bottom: 0.5rem;
+  font-weight: bold;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #2f3336;
+  display: ${({ visible }) => (visible ? "flex" : "none")};
 `;
 
 const IconsRow = styled.div`
@@ -78,31 +85,52 @@ const PostBtn = styled.button`
   border-radius: 999px;
   padding: 8px 16px;
   font-weight: bold;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
+  opacity: ${({ disabled }) => (disabled ? 0.6 : 1)};
 
   &:hover {
     background-color: #1483c2;
   }
 `;
 
-const TweetForm = () => {
+const TweetForm = ({ onPost }) => {
+  const [text, setText] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
+
+  const handleSubmit = () => {
+    if (text.trim() === "") return;
+    onPost(text.trim());
+    setText(""); // 작성 후 비우기
+    setIsFocused(false); // 포커스도 제거
+  };
+
   return (
     <FormContainer>
       <ProfileImage />
       <ContentArea>
-        <Input placeholder="What is happening?!" />
-        <Settings>
-          <FaGlobeAsia />
+        <Input
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="What is happening?!"
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+        />
+        <ReplySettings visible={isFocused || text.trim() !== ""}>
+          <FaEarthAmericas />
           <span>Everyone can reply</span>
-        </Settings>
+        </ReplySettings>
         <IconsRow>
           <IconGroup>
-            <FaRegImage />
-            <FaRegSmile />
-            <FaCalendarAlt />
-            <IoLocationOutline />
+            <FiImage />
+            <MdOutlineGifBox />
+            <RiListRadio />
+            <BsEmojiSmile />
+            <RiCalendarScheduleLine />
+            <GrLocation />
           </IconGroup>
-          <PostBtn>Post</PostBtn>
+          <PostBtn disabled={text.trim() === ""} onClick={handleSubmit}>
+            Post
+          </PostBtn>
         </IconsRow>
       </ContentArea>
     </FormContainer>

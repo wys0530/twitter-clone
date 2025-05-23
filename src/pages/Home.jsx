@@ -1,20 +1,14 @@
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
 import styled from "styled-components";
 import NavBar from "../components/common/NavBar";
 import RightSideBar from "../components/common/RightSideBar";
 import TweetForm from "../components/post/TweetForm";
 import TweetItem from "../components/post/TweetItem";
 import MainHeader from "../components/common/MainHeader";
-
-const Layout = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 93vh;
-  overflow: visible;
-  //padding: 1rem;
-  //margin: 1rem;
-  //box-sizing: border-box;
-`;
+import Layout from "../components/common/Layout";
+import dummyTweets from "../data/dummyTweets";
 
 const Main = styled.main`
   display: flex;
@@ -25,7 +19,7 @@ const MainContainer = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  overflow-y: auto;
+  overflow-y: scroll;
   width: 600px;
   height: 100%;
   border-left: 1.25px solid #2f3336;
@@ -41,52 +35,30 @@ const MainContainer = styled.div`
   }
 `;
 
-// const TweetListContainer = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   flex: 1;
-//   overflow-y: auto;
-// `;
-
 const Home = () => {
-  const dummyTweets = [
-    {
-      id: 1,
-      username: "elonmusk",
-      content: "What Earth looks like in radio frequency...",
-    },
-    {
-      id: 2,
+  const [tweets, setTweets] = useState(dummyTweets);
+  const location = useLocation();
+
+  useEffect(() => {
+    const deletedId = location.state?.deletedId;
+    if (deletedId) {
+      setTweets((prev) => prev.filter((tweet) => tweet.id !== deletedId));
+    }
+  }, [location.state]);
+
+  const handleAddTweet = (text) => {
+    const newTweet = {
+      id: Date.now(),
       username: "efub_5th_toy",
-      content: "EFUB 5기 최고",
-    },
-    {
-      id: 3,
-      username: "efub_5th_toy",
-      content: "EFUB 5기 최고",
-    },
-    {
-      id: 4,
-      username: "efub_5th_toy",
-      content: "ggEFUB 5기 최고",
-    },
-    {
-      id: 5,
-      username: "efub_5th_toy",
-      content: "EFUB 5기 최고",
-    },
-    {
-      id: 6,
-      username: "efub_5th_toy",
-      content: "6 EFUB 5기 최고",
-    },
-    {
-      id: 7,
-      username: "efub_5th_toy",
-      content: "akwlakr? EFUB 5기 최고 n하하",
-    },
-    { id: 8, username: "efub_5th_toy", content: "마지막/ EFUB 5기 최고" },
-  ];
+      content: text,
+      createdAt: new Date().toISOString(),
+    };
+    setTweets([newTweet, ...tweets]); // 위에 새 트윗 추가
+  };
+
+  const handleDelete = (id) => {
+    setTweets((prev) => prev.filter((tweet) => tweet.id !== id));
+  };
 
   return (
     <Layout>
@@ -94,9 +66,9 @@ const Home = () => {
       <Main>
         <MainHeader />
         <MainContainer>
-          <TweetForm />
-          {dummyTweets.map((tweet) => (
-            <TweetItem key={tweet.id} tweet={tweet} />
+          <TweetForm onPost={handleAddTweet} />
+          {tweets.map((tweet) => (
+            <TweetItem key={tweet.id} tweet={tweet} onDelete={handleDelete} />
           ))}
         </MainContainer>
       </Main>

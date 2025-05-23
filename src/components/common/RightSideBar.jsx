@@ -11,7 +11,7 @@ const RightContainer = styled.div`
   height: 88vh;
   position: sticky;
   flex-shrink: 0;
-  margin-left: 3rem;
+  margin-left: 2rem;
   padding: 1rem;
   //position: sticky;
 `;

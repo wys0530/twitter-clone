@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { FaXTwitter } from "react-icons/fa6";
-import { GoHomeFill } from "react-icons/go";
+import { GoHome, GoHomeFill } from "react-icons/go";
 import {
   IoSearch,
   IoEllipsisHorizontalCircle,
@@ -10,19 +10,19 @@ import {
 import { PiBell } from "react-icons/pi";
 import { FiMail } from "react-icons/fi";
 import { RiFileListLine, RiSlashCommands2 } from "react-icons/ri";
-import { HiOutlineUser, HiOutlineUsers } from "react-icons/hi";
+import { HiUser, HiOutlineUser, HiOutlineUsers } from "react-icons/hi";
 
 const NavBarContainer = styled.nav`
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   justify-content: flex-start;
-  width: 280px;
+  width: 250px;
   padding: 1rem 1rem;
   background-color: transparent;
   color: white;
   //border: 1px solid white;
-  margin-right: 3rem;
+  margin-right: 2rem;
   height: 100%;
   position: sticky;
   flex-shrink: 0;
@@ -119,6 +119,7 @@ const UserInfo = styled.div`
   cursor: pointer;
   //border: 1px solid white;
   box-sizing: border-box;
+  border-radius: 99px;
 
   &:hover {
     background-color: #1c1c1c;
@@ -165,8 +166,12 @@ const NavBar = () => {
       <Menu>
         <MenuItem>
           <NavLink to="/">
-            <GoHomeFill />
-            Home
+            {({ isActive }) => (
+              <>
+                {isActive ? <GoHomeFill /> : <GoHome />}
+                Home
+              </>
+            )}
           </NavLink>
         </MenuItem>
         <MenuItem>
@@ -202,8 +207,14 @@ const NavBar = () => {
           Premium
         </MenuItem>
         <MenuItem>
-          <HiOutlineUser />
-          <NavLink to="/profile/:userId">Profile</NavLink>
+          <NavLink to="/profile/:userId">
+            {({ isActive }) => (
+              <>
+                {isActive ? <HiUser /> : <HiOutlineUser />}
+                Profile
+              </>
+            )}
+          </NavLink>
         </MenuItem>
         <MenuItem>
           <IoEllipsisHorizontalCircle />

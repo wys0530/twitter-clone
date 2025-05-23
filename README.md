@@ -1,4 +1,15 @@
-## 프로젝트 구조
+# 구현 화면(25.05.23)
+
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
+
+삭제 기능(내 글에 한 해 가능함)
+![alt text](image-3.png)
+![alt text](image-4.png)
+
+# 프로젝트 구조
+
 ```
 twitter-clone/
 ├── public/

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { fetchTweets, postTweet, deleteTweet } from "../api/tweetApi";
 
 import styled from "styled-components";
 import NavBar from "../components/common/NavBar";
@@ -36,8 +37,24 @@ const MainContainer = styled.div`
 `;
 
 const Home = () => {
-  const [tweets, setTweets] = useState(dummyTweets);
+  const [tweets, setTweets] = useState([]);
   const location = useLocation();
+
+  // const userId = 1;
+  // const password = "1234";
+
+  useEffect(() => {
+    const loadTweets = async () => {
+      try {
+        const res = await fetchTweets();
+        setTweets(res.data); // 응답 구조에 따라 조정
+      } catch (err) {
+        console.error("트윗 불러오기 실패:", err);
+      }
+    };
+
+    loadTweets();
+  }, []);
 
   useEffect(() => {
     const deletedId = location.state?.deletedId;
@@ -46,18 +63,44 @@ const Home = () => {
     }
   }, [location.state]);
 
-  const handleAddTweet = (text) => {
-    const newTweet = {
-      id: Date.now(),
-      username: "efub_5th_toy",
-      content: text,
-      createdAt: new Date().toISOString(),
-    };
-    setTweets([newTweet, ...tweets]); // 위에 새 트윗 추가
+  const handleAddTweet = async (text) => {
+    try {
+      const userId = 2; // 실제 로그인된 사용자 ID로 교체 필요
+      const res = await postTweet(userId, text);
+      console.log("✅ 트윗 작성 성공!", res.data);
+      setTweets((prev) => [res.data, ...prev]);
+    } catch (err) {
+      console.error("트윗 작성 실패:", err);
+    }
   };
+  // useEffect(() => {
+  //   const deletedId = location.state?.deletedId;
+  //   if (deletedId) {
+  //     setTweets((prev) => prev.filter((tweet) => tweet.id !== deletedId));
+  //   }
+  // }, [location.state]);
 
-  const handleDelete = (id) => {
-    setTweets((prev) => prev.filter((tweet) => tweet.id !== id));
+  // const handleAddTweet = (text) => {
+  //   const newTweet = {
+  //     id: Date.now(),
+  //     username: "efub_5th_toy",
+  //     content: text,
+  //     createdAt: new Date().toISOString(),
+  //   };
+  //   setTweets([newTweet, ...tweets]); // 위에 새 트윗 추가
+  // };
+
+  // const handleDelete = (id) => {
+  //   setTweets((prev) => prev.filter((tweet) => tweet.id !== id));
+  // };
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteTweet(id, userId, password);
+      setTweets((prev) => prev.filter((tweet) => tweet.id !== id));
+    } catch (err) {
+      console.error("트윗 삭제 실패:", err);
+    }
   };
 
   return (

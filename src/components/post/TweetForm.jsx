@@ -58,7 +58,7 @@ const ReplySettings = styled.div`
   font-weight: bold;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid #2f3336;
-  display: ${({ visible }) => (visible ? "flex" : "none")};
+  display: ${({ $visible }) => ($visible ? "flex" : "none")};
 `;
 
 const IconsRow = styled.div`
@@ -85,8 +85,8 @@ const PostBtn = styled.button`
   border-radius: 999px;
   padding: 8px 16px;
   font-weight: bold;
-  cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
-  opacity: ${({ disabled }) => (disabled ? 0.6 : 1)};
+  cursor: ${({ $disabled }) => ($disabled ? "default" : "pointer")};
+  opacity: ${({ $disabled }) => ($disabled ? 0.6 : 1)};
 
   &:hover {
     background-color: #1483c2;
@@ -115,7 +115,7 @@ const TweetForm = ({ onPost }) => {
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
         />
-        <ReplySettings visible={isFocused || text.trim() !== ""}>
+        <ReplySettings $visible={isFocused || text.trim() !== ""}>
           <FaEarthAmericas />
           <span>Everyone can reply</span>
         </ReplySettings>
@@ -128,7 +128,7 @@ const TweetForm = ({ onPost }) => {
             <RiCalendarScheduleLine />
             <GrLocation />
           </IconGroup>
-          <PostBtn disabled={text.trim() === ""} onClick={handleSubmit}>
+          <PostBtn $disabled={text.trim() === ""} onClick={handleSubmit}>
             Post
           </PostBtn>
         </IconsRow>

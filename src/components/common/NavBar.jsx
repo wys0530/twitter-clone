@@ -146,6 +146,7 @@ const UserId = styled.div`
 const Ellipsis = styled.div`
   margin-left: auto;
   font-size: 20px;
+  color: gray;
 `;
 
 const ProfileText = styled.div`
@@ -154,6 +155,7 @@ const ProfileText = styled.div`
   align-items: left;
   text-align: left;
   margin-left: 1rem;
+  color: white;
 `;
 
 const NavBar = () => {
@@ -223,15 +225,16 @@ const NavBar = () => {
       </Menu>
 
       <PostBtn>Post</PostBtn>
-
-      <UserInfo>
-        <ProfileImg />
-        <ProfileText>
-          <UserName>이퍼비</UserName>
-          <UserId>@efub_5th_toy</UserId>
-        </ProfileText>
-        <Ellipsis>⋯</Ellipsis>
-      </UserInfo>
+      <NavLink to="/profile/:userId">
+        <UserInfo>
+          <ProfileImg />
+          <ProfileText>
+            <UserName>이퍼비</UserName>
+            <UserId>@efub_5th_toy</UserId>
+          </ProfileText>
+          <Ellipsis>⋯</Ellipsis>
+        </UserInfo>
+      </NavLink>
     </NavBarContainer>
   );
 };

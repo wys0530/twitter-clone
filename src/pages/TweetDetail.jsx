@@ -6,7 +6,7 @@ import NavBar from "../components/common/NavBar";
 import RightSideBar from "../components/common/RightSideBar";
 import Layout from "../components/common/Layout";
 import DetailBackHeader from "../components/post/DetailBackHeader";
-import Replayform from "../components/post/Replyfrom";
+import Replayform from "../components/post/Replyform";
 import ReplyItem from "../components/post/ReplyItem";
 import DeleteModal from "../components/post/DeleteModal";
 

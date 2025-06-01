@@ -17,8 +17,6 @@ const ProfilePost = ({ tweets, onDelete }) => {
     setMyTweets(tweets);
   }, [tweets]);
 
-  console.log("ProfilePost 받은 트윗들:", tweets);
-
   return (
     <PostContainer>
       {myTweets.map((tweet) => (

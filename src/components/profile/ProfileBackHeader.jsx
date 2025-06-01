@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
+import { useEffect } from "react";
 
 const ProfileBackHeaderContainer = styled.div`
   display: flex;
@@ -37,7 +38,7 @@ const PostCount = styled.span`
   font-weight: normal;
 `;
 
-const ProfileBackHeader = () => {
+const ProfileBackHeader = ({ nickName, postCount }) => {
   return (
     <>
       <ProfileBackHeaderContainer>
@@ -45,8 +46,8 @@ const ProfileBackHeader = () => {
           <IoArrowBack />
         </NavLink>
         <TextBox>
-          <DisplayName>이퍼비</DisplayName>
-          <PostCount>2 posts</PostCount>
+          <DisplayName>{nickName}</DisplayName>
+          <PostCount>{postCount} posts</PostCount>
         </TextBox>
       </ProfileBackHeaderContainer>
     </>

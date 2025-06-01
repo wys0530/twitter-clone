@@ -129,8 +129,8 @@ const TweetItem = ({ tweet, onDelete }) => {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
-  const currentUser = "@mungsu";
-  const isOwner = tweet.handle === currentUser;
+  const currentUser = 2;
+  const isOwner = tweet.userId === currentUser;
 
   const handleEllipsisClick = (e) => {
     e.stopPropagation();
@@ -157,7 +157,7 @@ const TweetItem = ({ tweet, onDelete }) => {
         <ProfileImage
           onClick={(e) => {
             e.stopPropagation(); // 트윗 클릭 이벤트 막기
-            navigate(`/profile/${tweet.handle}`);
+            navigate(`/profile/${tweet.userId}`);
           }}
           style={{ cursor: "pointer" }}
         />

@@ -1,25 +1,28 @@
 import styled from "styled-components";
 import dummyTweets from "../../data/dummyTweets"; // 트윗 리스트 가져오기
 import TweetItem from "../post/TweetItem";
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const PostContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const ProfilePost = () => {
-  const currentUser = "@mungsu";
+const ProfilePost = ({ tweets, onDelete }) => {
+  const [myTweets, setMyTweets] = useState([]);
+  const currentUser = "2";
 
-  const myTweets = dummyTweets.filter((tweet) => tweet.handle === currentUser);
+  useEffect(() => {
+    setMyTweets(tweets);
+  }, [tweets]);
 
-  const handleDelete = (id) => {
-    setTweets((prev) => prev.filter((tweet) => tweet.userId !== id));
-  };
+  console.log("ProfilePost 받은 트윗들:", tweets);
 
   return (
     <PostContainer>
       {myTweets.map((tweet) => (
-        <TweetItem key={tweet.tweetId} tweet={tweet} onDelete={handleDelete} />
+        <TweetItem key={tweet.tweetId} tweet={tweet} onDelete={onDelete} />
       ))}
     </PostContainer>
   );

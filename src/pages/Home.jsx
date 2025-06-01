@@ -72,26 +72,6 @@ const Home = () => {
       console.error("트윗 작성 실패:", err);
     }
   };
-  // useEffect(() => {
-  //   const deletedId = location.state?.deletedId;
-  //   if (deletedId) {
-  //     setTweets((prev) => prev.filter((tweet) => tweet.id !== deletedId));
-  //   }
-  // }, [location.state]);
-
-  // const handleAddTweet = (text) => {
-  //   const newTweet = {
-  //     id: Date.now(),
-  //     username: "efub_5th_toy",
-  //     content: text,
-  //     createdAt: new Date().toISOString(),
-  //   };
-  //   setTweets([newTweet, ...tweets]); // 위에 새 트윗 추가
-  // };
-
-  // const handleDelete = (id) => {
-  //   setTweets((prev) => prev.filter((tweet) => tweet.id !== id));
-  // };
 
   const handleDelete = async (id) => {
     const userId = 2; //사용자 임시 고정

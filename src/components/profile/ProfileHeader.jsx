@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { PiCalendarDots } from "react-icons/pi";
+import { useParams } from "react-router-dom";
 
 const Banner = styled.div`
   height: 200px;
@@ -93,7 +94,12 @@ const Tab = styled.div`
   cursor: pointer;
 `;
 
-const ProfileHeader = () => {
+const ProfileHeader = ({ user }) => {
+  const joinedDate = new Date(user.createdAt).toLocaleString("en-US", {
+    year: "numeric",
+    month: "long",
+  });
+
   return (
     <>
       <Wrapper>
@@ -103,10 +109,10 @@ const ProfileHeader = () => {
           <EditButton>Edit profile</EditButton>
         </ProfileSection>
         <UserInfo>
-          <DisplayName>멍수</DisplayName>
-          <UserId>@mungsu</UserId>
+          <DisplayName>{user.nickname}</DisplayName>
+          <UserId>{user.handle}</UserId>
           <JoinedDate>
-            <PiCalendarDots /> Joined January 2024
+            <PiCalendarDots /> Joined {joinedDate}
           </JoinedDate>
           <FollowInfo>
             <span>

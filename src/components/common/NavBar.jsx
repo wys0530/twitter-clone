@@ -209,7 +209,7 @@ const NavBar = () => {
           Premium
         </MenuItem>
         <MenuItem>
-          <NavLink to="/profile/:userId">
+          <NavLink to="/profile/2">
             {({ isActive }) => (
               <>
                 {isActive ? <HiUser /> : <HiOutlineUser />}
@@ -225,7 +225,7 @@ const NavBar = () => {
       </Menu>
 
       <PostBtn>Post</PostBtn>
-      <NavLink to="/profile/:userId">
+      <NavLink to="/profile/2">
         <UserInfo>
           <ProfileImg />
           <ProfileText>

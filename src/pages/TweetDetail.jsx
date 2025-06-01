@@ -1,6 +1,7 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import styled from "styled-components";
+import { deleteTweet } from "../api/tweetApi";
 
 import NavBar from "../components/common/NavBar";
 import RightSideBar from "../components/common/RightSideBar";
@@ -205,16 +206,15 @@ const TweetDetail = () => {
   const [showModal, setShowModal] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [replies, setReplies] = useState([]);
-
   const navigate = useNavigate();
+  const currentUser = 2;
 
-  const currentUser = "efub_5th_toy";
-  const isOwner = tweet.username === currentUser;
+  const isOwner = tweet.userId === currentUser;
 
   const handleAddReply = (text) => {
     const newReply = {
       id: replies.length + 1,
-      username: "efub_5th_toy",
+      username: "멍수",
       content: text,
       createdAt: new Date().toISOString(),
     };
@@ -234,9 +234,15 @@ const TweetDetail = () => {
     setShowModal(true);
   };
 
-  const handleConfirmDelete = () => {
-    setShowModal(false);
-    navigate("/", { state: { deletedId: tweet.tweetId } });
+  const handleConfirmDelete = async () => {
+    try {
+      await deleteTweet(tweet.tweetId, currentUser);
+      setShowModal(false);
+      navigate("/", { state: { deletedId: tweet.tweetId } });
+    } catch (err) {
+      console.error("트윗 삭제 실패:", err);
+      alert("삭제 중 오류가 발생했습니다.");
+    }
   };
 
   return (

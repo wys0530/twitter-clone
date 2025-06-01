@@ -108,7 +108,7 @@ const ReplyItem = ({ reply }) => {
       <TweetContent>
         <UserInfo>
           <span className="username">{reply.username}</span>
-          <span className="userid">@{reply.username}</span>
+          <span className="userid">@mungsu</span>
           <span className="dot">·</span>
           <span className="time">{getTimeAgo(reply.createdAt)}</span>
           <Ellipsis>⋯</Ellipsis>

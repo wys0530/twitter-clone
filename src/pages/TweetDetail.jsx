@@ -236,7 +236,7 @@ const TweetDetail = () => {
 
   const handleConfirmDelete = () => {
     setShowModal(false);
-    navigate("/", { state: { deletedId: tweet.id } });
+    navigate("/", { state: { deletedId: tweet.tweetId } });
   };
 
   return (
@@ -255,8 +255,8 @@ const TweetDetail = () => {
                 style={{ cursor: "pointer" }}
               />
               <ProfileText>
-                <UserName>{tweet.username}</UserName>
-                <UserId>@{tweet.username}</UserId>
+                <UserName>{tweet.nickname}</UserName>
+                <UserId>{tweet.handle}</UserId>
               </ProfileText>
               <EllipsisWrapper>
                 <Ellipsis onClick={handleEllipsisClick}>⋯</Ellipsis>

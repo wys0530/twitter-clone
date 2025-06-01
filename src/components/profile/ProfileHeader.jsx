@@ -87,9 +87,9 @@ const Wrapper = styled.div``;
 const Tab = styled.div`
   text-align: center;
   padding: 0.9rem 0.3rem;
-  color: ${({ active }) => (active ? "white" : "gray")};
-  font-weight: ${({ active }) => (active ? "bold" : "normal")};
-  border-bottom: ${({ active }) => (active ? "3px solid #1d9bf0" : "none")};
+  color: ${({ $active }) => ($active ? "white" : "gray")};
+  font-weight: ${({ $active }) => ($active ? "bold" : "normal")};
+  border-bottom: ${({ $active }) => ($active ? "3px solid #1d9bf0" : "none")};
   cursor: pointer;
 `;
 
@@ -103,8 +103,8 @@ const ProfileHeader = () => {
           <EditButton>Edit profile</EditButton>
         </ProfileSection>
         <UserInfo>
-          <DisplayName>이퍼비</DisplayName>
-          <UserId>@efub_5th_toy</UserId>
+          <DisplayName>멍수</DisplayName>
+          <UserId>@mungsu</UserId>
           <JoinedDate>
             <PiCalendarDots /> Joined January 2024
           </JoinedDate>
@@ -118,7 +118,7 @@ const ProfileHeader = () => {
           </FollowInfo>
         </UserInfo>
         <TabMenu>
-          <Tab active>Posts</Tab>
+          <Tab $active>Posts</Tab>
           <Tab>Replies</Tab>
           <Tab>Highlights</Tab>
           <Tab>Articles</Tab>

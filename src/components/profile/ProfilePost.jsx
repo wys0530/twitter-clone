@@ -8,20 +8,18 @@ const PostContainer = styled.div`
 `;
 
 const ProfilePost = () => {
-  const currentUser = "efub_5th_toy";
+  const currentUser = "@mungsu";
 
-  const myTweets = dummyTweets.filter(
-    (tweet) => tweet.username === currentUser
-  );
+  const myTweets = dummyTweets.filter((tweet) => tweet.handle === currentUser);
 
   const handleDelete = (id) => {
-    setTweets((prev) => prev.filter((tweet) => tweet.id !== id));
+    setTweets((prev) => prev.filter((tweet) => tweet.userId !== id));
   };
 
   return (
     <PostContainer>
       {myTweets.map((tweet) => (
-        <TweetItem key={tweet.id} tweet={tweet} onDelete={handleDelete} />
+        <TweetItem key={tweet.tweetId} tweet={tweet} onDelete={handleDelete} />
       ))}
     </PostContainer>
   );

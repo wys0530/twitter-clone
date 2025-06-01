@@ -129,8 +129,8 @@ const TweetItem = ({ tweet, onDelete }) => {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
-  const currentUser = "efub_5th_toy";
-  const isOwner = tweet.username === currentUser;
+  const currentUser = "@mungsu";
+  const isOwner = tweet.handle === currentUser;
 
   const handleEllipsisClick = (e) => {
     e.stopPropagation();
@@ -144,27 +144,27 @@ const TweetItem = ({ tweet, onDelete }) => {
   };
 
   const handleConfirmDelete = () => {
-    onDelete(tweet.id); // 상위에서 전달된 삭제 함수 호출
+    onDelete(tweet.tweetId); // 상위에서 전달된 삭제 함수 호출
     setShowModal(false);
   };
 
   return (
     <>
       <TweetContainer
-        onClick={() => navigate(`/tweet/${tweet.id}`, { state: tweet })}
+        onClick={() => navigate(`/tweet/${tweet.tweetId}`, { state: tweet })}
         style={{ cursor: "pointer" }}
       >
         <ProfileImage
           onClick={(e) => {
             e.stopPropagation(); // 트윗 클릭 이벤트 막기
-            navigate(`/profile/${tweet.username}`);
+            navigate(`/profile/${tweet.handle}`);
           }}
           style={{ cursor: "pointer" }}
         />
         <TweetContent>
           <UserInfo>
-            <span className="username">{tweet.username}</span>
-            <span className="userid">@{tweet.username}</span>
+            <span className="username">{tweet.nickname}</span>
+            <span className="userid">{tweet.handle}</span>
             <span className="dot">·</span>
             <span className="time">{getTimeAgo(tweet.createdAt)}</span>
             <EllipsisWrapper>

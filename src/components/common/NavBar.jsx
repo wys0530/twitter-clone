@@ -144,7 +144,7 @@ const UserId = styled.div`
 `;
 
 const Ellipsis = styled.div`
-  margin-left: auto;
+  margin-left: 3rem;
   font-size: 20px;
   color: gray;
 `;
@@ -229,8 +229,8 @@ const NavBar = () => {
         <UserInfo>
           <ProfileImg />
           <ProfileText>
-            <UserName>이퍼비</UserName>
-            <UserId>@efub_5th_toy</UserId>
+            <UserName>멍수 </UserName>
+            <UserId>@mungsu</UserId>
           </ProfileText>
           <Ellipsis>⋯</Ellipsis>
         </UserInfo>

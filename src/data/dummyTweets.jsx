@@ -48,6 +48,7 @@ const dummyTweets = [
     content:
       "Just to reiterate: Tesla will spend well over $500M expanding our Supercharger network to create thousands of NEW chargers this year.\n\nThat’s just on new sites and expansions, not counting operations costs, which are much higher.",
   },
+  { tweetId: 12, nickname: "멍수", handle: "@mungsu", content: "ㅎ" },
 ];
 
 export default dummyTweets;

@@ -40,14 +40,13 @@ const Home = () => {
   const [tweets, setTweets] = useState([]);
   const location = useLocation();
 
-  // const userId = 1;
-  // const password = "1234";
-
   useEffect(() => {
     const loadTweets = async () => {
       try {
         const res = await fetchTweets();
-        setTweets(res.data); // 응답 구조에 따라 조정
+        console.log("📦 받아온 데이터", res.data.tweets);
+
+        setTweets(res.data.tweets); // 응답 구조에 따라 조정
       } catch (err) {
         console.error("트윗 불러오기 실패:", err);
       }
@@ -95,9 +94,10 @@ const Home = () => {
   // };
 
   const handleDelete = async (id) => {
+    const userId = 2; //사용자 임시 고정
     try {
-      await deleteTweet(id, userId, password);
-      setTweets((prev) => prev.filter((tweet) => tweet.id !== id));
+      await deleteTweet(id, userId);
+      setTweets((prev) => prev.filter((tweet) => tweet.tweetId !== id));
     } catch (err) {
       console.error("트윗 삭제 실패:", err);
     }
@@ -111,7 +111,11 @@ const Home = () => {
         <MainContainer>
           <TweetForm onPost={handleAddTweet} />
           {tweets.map((tweet) => (
-            <TweetItem key={tweet.id} tweet={tweet} onDelete={handleDelete} />
+            <TweetItem
+              key={tweet.tweetId}
+              tweet={tweet}
+              onDelete={handleDelete}
+            />
           ))}
         </MainContainer>
       </Main>

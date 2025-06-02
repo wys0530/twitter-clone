@@ -256,7 +256,7 @@ const TweetDetail = () => {
               <ProfileImage
                 onClick={(e) => {
                   e.stopPropagation(); // 트윗 클릭 이벤트 막기
-                  navigate(`/profile/${tweet.username}`);
+                  navigate(`/profile/${tweet.userId}`);
                 }}
                 style={{ cursor: "pointer" }}
               />
